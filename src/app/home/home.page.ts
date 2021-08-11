@@ -7,6 +7,8 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  public tabs = this.getTabs();
   constructor(private data: DataService) {}
 
   refresh(ev) {
@@ -19,4 +21,12 @@ export class HomePage {
     return this.data.getMessages();
   }
 
+  getTabs(){
+    return [
+      {name: 'schedule', icon: 'calendar', label: 'Schedule', badge: 6},
+      {name: 'speakers', icon: 'person-circle', label: 'Speakers'},
+      {name: 'map', icon: 'map', label: 'Map'},
+      {name: 'about', icon: 'information-circle', label: 'info'},
+    ];
+  }
 }
