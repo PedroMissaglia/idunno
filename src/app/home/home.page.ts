@@ -23,7 +23,7 @@ export class HomePage {
 
   getTabs(){
     return [
-      {name: 'schedule', icon: 'calendar', label: 'Schedule', badge: 6},
+      {name: 'chat', icon: 'chatbubbles', label: 'chat'},
       {name: 'speakers', icon: 'person-circle', label: 'Speakers'},
       {name: 'map', icon: 'map', label: 'Map'},
       {name: 'about', icon: 'information-circle', label: 'info'},

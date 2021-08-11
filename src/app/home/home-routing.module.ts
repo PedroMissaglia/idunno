@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { ChatPage } from '../chat/chat.page';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutPage
+  },
+  {
+    path: 'chat',
+    component: ChatPage
   }
 ];
 
