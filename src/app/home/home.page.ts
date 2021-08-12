@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChatService } from '../chat/services/firebase.service';
 import { DataService, Message } from '../services/data.service';
 
 @Component({
@@ -8,25 +10,12 @@ import { DataService, Message } from '../services/data.service';
 })
 export class HomePage {
 
-  public tabs = this.getTabs();
-  constructor(private data: DataService) {}
+  constructor(private chatService: ChatService, private router: Router) {}
 
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
-  }
-
-  getTabs(){
-    return [
-      {name: 'chat', icon: 'chatbubbles', label: 'chat'},
-      {name: 'speakers', icon: 'person-circle', label: 'Speakers'},
-      {name: 'map', icon: 'map', label: 'Map'},
-      {name: 'about', icon: 'information-circle', label: 'info'},
-    ];
+   
+  signOut() {
+    this.chatService.signOut().then(() => {
+      this.router.navigateByUrl('/', { replaceUrl: true });
+    });
   }
 }

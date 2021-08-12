@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonContent, ToastController } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Observable } from 'rxjs';
+import { ChatService } from './services/firebase.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,49 +12,22 @@ import { fromEvent } from 'rxjs';
 })
 export class ChatPage implements OnInit {
 
-  message = '';
-  public messages = [];
-  currentUser = '';
-  constructor(private socket: Socket, private toastCtrl: ToastController) { }
-
+  @ViewChild(IonContent) content: IonContent;
+ 
+  messages: Observable<any[]>;
+  newMsg = '';
+ 
+  constructor(private chatService: ChatService, private router: Router) { }
+ 
   ngOnInit() {
-    this.socket.connect();
-
-    let name = `user-${new Date().getTime()}`;
-    this.currentUser = name;
-
-    this.socket.emit('set-name', name);
-
-    this.socket.fromEvent('users-changed').subscribe(data => {
-      let user = data['user'];
-      if (data['event'] === 'left') {
-        this.showToast('User left: ' + user);
-      } else {
-        this.showToast('User joined: ' + user);
-      }
-    });
-
-    this.socket.fromEvent('message').subscribe(message => {
-      this.messages.push(message);
-    });
+    this.messages = this.chatService.getChatMessages();
   }
-
+ 
   sendMessage() {
-    this.socket.emit('send-message', { text: this.message });
-    this.message = '';
-  }
-
-  ionViewWillLeave() {
-    this.socket.disconnect();
-  }
-
-  async showToast(msg) {
-    let toast = await this.toastCtrl.create({
-      message: msg,
-      position: 'top',
-      duration: 2000
+    this.chatService.addChatMessage(this.newMsg).then(() => {
+      this.newMsg = '';
+      this.content.scrollToBottom();
     });
-    toast.present();
   }
 
 }

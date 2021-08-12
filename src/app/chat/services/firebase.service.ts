@@ -57,6 +57,15 @@ export class ChatService {
 
   // TODO Chat functionality
 
+   
+  addChatMessage(msg) {
+    return this.afs.collection('messages').add({
+      msg: msg,
+      from: this.currentUser.uid,
+      createdAt: new Date()
+    });
+  }
+
   getChatMessages() {
     let users = [];
     return this.getUsers().pipe(
