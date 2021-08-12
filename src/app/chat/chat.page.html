@@ -12,21 +12,22 @@
     <ion-text color="medium" text-center>
       <p>You joined the chat as {{ currentUser }}</p>
     </ion-text>
-    <ion-row *ngFor="let message of messages">
+    <div *ngFor="let msg of messages">
+      <ion-row >
+        <ion-col size="9" *ngIf="msg.user !== currentUser" class="message other-message">
+          <b>{{ msg.user }}</b><br>
+          <span>{{ msg.msg }}</span>
+          <div class="time" text-right><br>{{ msg.createdAt | date:'short' }}</div>
+        </ion-col>
 
-      <ion-col size="9" *ngIf="message.user !== currentUser" class="message other-message">
-        <b>{{ message.user }}</b><br>
-        <span>{{ message.msg }}</span>
-        <div class="time" text-right><br>{{ message.createdAt | date:'short' }}</div>
-      </ion-col>
+        <ion-col offset="3" size="9" *ngIf="msg.user === currentUser" class="message my-message">
+          <b>{{ msg.user }}</b><br>
+          <span>{{ msg.msg }}</span>
+          <div class="time" text-right><br>{{ msg.createdAt | date:'short' }}</div>
+        </ion-col>
 
-      <ion-col offset="3" size="9" *ngIf="message.user === currentUser" class="message my-message">
-        <b>{{ message.user }}</b><br>
-        <span>{{ message.msg }}</span>
-        <div class="time" text-right><br>{{ message.createdAt | date:'short' }}</div>
-      </ion-col>
-
-    </ion-row>
+      </ion-row>
+    </div>
   </ion-grid>
 
 </ion-content>

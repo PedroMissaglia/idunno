@@ -11,7 +11,7 @@ import { fromEvent } from 'rxjs';
 export class ChatPage implements OnInit {
 
   message = '';
-  messages = [];
+  public messages = [];
   currentUser = '';
   constructor(private socket: Socket, private toastCtrl: ToastController) { }
 

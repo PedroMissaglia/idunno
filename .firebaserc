@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "idunno-1d89f"
+  },
+  "targets": {
+    "idunno-1d89f": {
+      "hosting": {
+        "app": [
+          "idunno-1d89f"
+        ]
+      }
+    }
   }
 }
