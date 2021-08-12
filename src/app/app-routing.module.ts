@@ -1,5 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo, AngularFireAuthGuard } from '@angular/fire/auth-guard';
+
+// Send unauthorized users to login
+const redirectUnauthorizedToLogin = () =>
+  redirectUnauthorizedTo(['/']);
+
+// Automatically log in users
+const redirectLoggedInToHome = () => redirectLoggedInTo(['/home']);
 
 const routes: Routes = [
   {
@@ -21,12 +29,15 @@ const routes: Routes = [
   },
   {
     path: 'chat',
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectUnauthorizedToLogin},
     loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
   },
   {
     path: 'signin',
-    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule)
-  }
+    loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {authGuardPipe: redirectLoggedInToHome},  }
 
 ];
 

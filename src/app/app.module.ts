@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
 
 @NgModule({
@@ -25,7 +26,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3001', options: {} };
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, AngularFireAuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
