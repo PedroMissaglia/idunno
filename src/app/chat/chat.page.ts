@@ -13,20 +13,20 @@ import { ChatService } from './services/firebase.service';
 export class ChatPage implements OnInit {
 
   @ViewChild(IonContent) content: IonContent;
- 
+
   messages: Observable<any[]>;
   newMsg = '';
- 
+
   constructor(private chatService: ChatService, private router: Router) { }
- 
+
   ngOnInit() {
     this.messages = this.chatService.getChatMessages();
   }
- 
+
   sendMessage() {
     this.chatService.addChatMessage(this.newMsg).then(() => {
       this.newMsg = '';
-      this.content.scrollToBottom();
+      setTimeout(()=>{this.content.scrollToBottom();},200);
     });
   }
 

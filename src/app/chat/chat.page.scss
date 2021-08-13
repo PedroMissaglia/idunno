@@ -16,12 +16,12 @@
 }
 
 .my-message {
-  background: var(--ion-color-tertiary);
+  //background: var(--ion-color-tertiary);
   color: #fff;
 }
 
 .other-message {
-  background: var(--ion-color-secondary);
+  //background: var(--ion-color-secondary);
   color: #fff;
 }
 
@@ -29,4 +29,21 @@
   color: #dfdfdf;
   float: right;
   font-size: small;
+}
+
+.img {
+  border-radius: 50%;
+}
+
+.rotate {
+  animation: rotation 5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }

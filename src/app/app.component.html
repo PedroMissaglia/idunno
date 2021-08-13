@@ -1,13 +1,3 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <div *ngFor="let tab of tabs">
-        <ion-tab-button [tab]="tab.name">
-          <ion-icon [name]="tab.icon"></ion-icon>
-          <ion-label>{{tab.label}}</ion-label>
-        </ion-tab-button>
-      </div>
-    </ion-tab-bar>
-  </ion-tabs>
 </ion-app>
